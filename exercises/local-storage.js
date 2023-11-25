@@ -38,3 +38,57 @@
  */
 
 // Your code goes here...
+function setRedBackgroundForFavorites() {
+    const favorites = localStorage.getItem("favorites");
+
+    if (favorites) {
+        const favoriteIds = favorites.split(',');
+
+        favoriteIds.forEach((id) => {
+            const favoriteItems = document.getElementById(id);
+            if (favoriteItems) {
+                favoriteItems.style.backgroundColor = 'red';
+            }
+        });
+    }
+}
+
+
+function addToFavorites(id) {
+    const favorites = localStorage.getItem("favorites");
+    const updatedFavorites = favorites ? `${favorites}, ${id}` : id;
+    localStorage.setItem("favorites", updatedFavorites);
+}
+
+
+function deleteFromFavorites(id) {
+    const favorites = localStorage.getItem("favorites");
+  
+    if (favorites) {
+      const favoriteIds = favorites.split(',');
+      const updatedFavorites = favoriteIds.filter((itemId) => itemId !== id).join(',');
+      localStorage.setItem("favorites", updatedFavorites);
+    }
+  }
+
+  function handleItemClick(event) {
+    const targetItem = event.target;
+    
+    if (targetItem.classList.contains('card')) {
+        const backgroundColor = targetItem.style.backgroundColor;
+        
+        if (backgroundColor === '' || backgroundColor === 'white') {
+            targetItem.style.backgroundColor = 'red';
+            addToFavorites(targetItem.id);
+        } else if (backgroundColor === 'red') {
+            targetItem.style.backgroundColor = 'white';
+            deleteFromFavorites(targetItem.id);
+        }
+    }
+  }
+  
+  const container = document.querySelector('.cardsContainer');
+  container.addEventListener('click', handleItemClick);
+
+  setRedBackgroundForFavorites();
+ 

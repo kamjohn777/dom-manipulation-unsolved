@@ -1,3 +1,9 @@
 {
-  "cSpell.words": ["Favs", "sortdir", "Devslopes", "applicatives"]
+  "cSpell.words": [
+    "Favs",
+    "sortdir",
+    "Devslopes",
+    "applicatives"
+  ],
+  "liveServer.settings.port": 5502
 }
